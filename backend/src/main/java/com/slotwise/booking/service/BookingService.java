@@ -38,7 +38,7 @@ public class BookingService {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found."));
 
-        Resource resource = resourceRepository.findById(request.resourceId())
+        Resource resource = resourceRepository.findByIdForUpdate(request.resourceId())
                 .orElseThrow(() -> new ResourceNotFoundException("Resource not found with ID: " + request.resourceId()));
 
         if (!resource.getActive()) {
