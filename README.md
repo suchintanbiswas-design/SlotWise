@@ -6,7 +6,7 @@
 
 A modern, full-stack web application for discovering, reserving, and managing campus rooms, labs, and facilities — built with React, Spring Boot, and PostgreSQL.
 
-[![CI](https://github.com/your-username/SlotWise/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/SlotWise/actions/workflows/ci.yml)
+[![CI](https://github.com/suchintanbiswas-design/SlotWise/actions/workflows/ci.yml/badge.svg)](https://github.com/suchintanbiswas-design/SlotWise/actions/workflows/ci.yml)
 ![Java](https://img.shields.io/badge/Java-21-blue?logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4-6DB33F?logo=springboot&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
@@ -97,7 +97,7 @@ SlotWise/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/SlotWise.git
+git clone https://github.com/suchintanbiswas-design/SlotWise.git
 cd SlotWise
 ```
 
@@ -256,7 +256,20 @@ Run `docker-compose down -v && docker-compose up --build -d` to reset the databa
 
 ## 📸 Screenshots
 
-> _Screenshots coming soon — run the application locally to explore the full UI including the split-screen auth pages, command-center dashboard, resource discovery grid, and bookings management table._
+### Authentication
+![Login Screen](docs/screenshots/login.png)
+
+### Dashboard Overview
+![Dashboard](docs/screenshots/dashboard.png)
+
+### Resource Catalog & Booking
+![Find Resources](docs/screenshots/resources.png)
+
+### Reservations Management
+![My Bookings](docs/screenshots/bookings.png)
+
+### Administrative Approvals
+![Admin Dashboard](docs/screenshots/admin.png)
 
 ---
 
@@ -277,5 +290,5 @@ This project is licensed under the [MIT License](LICENSE).
 ---
 
 <div align="center">
-  <sub>Built with ☕ and ⚛️ by <a href="https://github.com/your-username">Your Name</a></sub>
+  <sub>Built with ☕ and ⚛️ by <a href="https://github.com/suchintanbiswas-design">Suchintan Biswas</a></sub>
 </div>
