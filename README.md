@@ -159,6 +159,7 @@ docker-compose down -v
 | POST   | `/api/v1/auth/register`         | Public   | Create a new user account      |
 | POST   | `/api/v1/auth/login`            | Public   | Authenticate and receive JWT   |
 | GET    | `/api/v1/resources`             | Bearer   | List all active campus resources |
+| GET    | `/api/v1/resources/{id}`        | Bearer   | Get resource details by ID     |
 | GET    | `/api/v1/bookings/me`           | Bearer   | Get current user's bookings    |
 | POST   | `/api/v1/bookings`              | Bearer   | Create a new reservation       |
 | POST   | `/api/v1/bookings/{id}/cancel`  | Bearer   | Cancel an existing reservation |
@@ -226,7 +227,7 @@ If you encounter a **500 Internal Server Error** when trying to log in or regist
 
 1. Open your browser's Developer Tools (F12).
 2. Navigate to **Application** → **Local Storage** → `http://localhost:5173`.
-3. Delete the `token` and `user` entries (or click **Clear All**).
+3. Delete the `jwt` and `user` entries (or click **Clear All**).
 4. Refresh the page and try logging in again.
 
 > [!TIP]
