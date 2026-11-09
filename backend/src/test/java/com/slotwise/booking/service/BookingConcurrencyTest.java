@@ -1,5 +1,6 @@
 package com.slotwise.booking.service;
 
+import com.slotwise.TestcontainersConfiguration;
 import com.slotwise.booking.dto.BookingRequest;
 import com.slotwise.common.exception.ResourceUnavailableException;
 import com.slotwise.resource.entity.Building;
@@ -14,11 +15,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.ZonedDateTime;
 import java.util.concurrent.CountDownLatch;
@@ -29,16 +27,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@Testcontainers
 @ActiveProfiles("test")
+@Import(TestcontainersConfiguration.class)
 public class BookingConcurrencyTest {
-
-    @Container
-    @ServiceConnection
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16")
-            .withDatabaseName("slotwise_test")
-            .withUsername("test")
-            .withPassword("test");
 
     @Autowired
     private BookingService bookingService;
@@ -137,4 +128,3 @@ public class BookingConcurrencyTest {
         assertEquals(19, conflictCount.get(), "Exactly nineteen bookings should be rejected due to conflict.");
     }
 }
-
