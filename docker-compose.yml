@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: slotwise-postgres
+    environment:
+      POSTGRES_USER: slotwise
+      POSTGRES_PASSWORD: slotwise_secret
+      POSTGRES_DB: slotwise_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U slotwise -d slotwise_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: 
+      context: ./backend
+    container_name: slotwise-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/slotwise_db
+      - SPRING_DATASOURCE_USERNAME=slotwise
+      - SPRING_DATASOURCE_PASSWORD=slotwise_secret
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: slotwise-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+
