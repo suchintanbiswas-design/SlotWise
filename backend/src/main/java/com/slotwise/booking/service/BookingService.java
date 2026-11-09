@@ -12,6 +12,7 @@ import com.slotwise.resource.repository.ResourceRepository;
 import com.slotwise.user.entity.User;
 import com.slotwise.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -60,8 +61,8 @@ public class BookingService {
             // If we only use save(), Hibernate delays execution until commit, bypassing this try-catch block.
             Booking savedBooking = bookingRepository.saveAndFlush(booking);
             return mapToResponse(savedBooking);
-        } catch (DataIntegrityViolationException e) {
-            // This catches the PostgreSQL btree_gist exclusion constraint violation
+        } catch (DataIntegrityViolationException | ConcurrencyFailureException e) {
+            // Handles both the exclusion-constraint violation and a deadlock/lock failure under heavy concurrency
             throw new ResourceUnavailableException("The resource is already booked for the selected time slot.");
         }
     }
